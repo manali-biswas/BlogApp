@@ -28,6 +28,10 @@ app.get("/",function(req,res){
 	res.redirect("/blogs");
 });
 
+app.get("/about",function(req,res){
+	res.render("home");
+});
+
 app.get("/blogs",function(req,res){
 	Blog.find({},function(err,blogs){
 		if(err){
@@ -101,6 +105,7 @@ app.delete("/blogs/:id",function(req,res){
 		}
 	})
 });
+
 
 
 app.listen(process.env.PORT,process.env.IP,function(){
