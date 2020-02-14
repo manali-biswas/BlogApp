@@ -1,4 +1,6 @@
 <%- include("partials/header.ejs")%>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+<link href="stylesheets/show.css" rel="stylesheet">
 <div class="ui main text container segment">
 	<div class="ui huge header">
 		<%=blog.title%>
@@ -10,13 +12,14 @@
 		</div>
 		<div class="content">
 			
-		<span><%=blog.created.toDateString()%></span>
-			
+		<span class="mydate"><%=blog.created.toDateString()%></span>
+			<hr>
 		</div>
+		<br>
 		<div class="description">
 			<%-blog.body%>
 		</div>
-		
+		<br>
 		<a href="/blogs/<%=blog._id%>/edit"><button class="ui inverted purple button">
 				Edit Blog
 			</button></a>
