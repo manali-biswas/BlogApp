@@ -4,8 +4,8 @@ var expressSanitizer=require("express-sanitizer");
 var methodOverride=require("method-override");
 var express=require("express");
 var app=express();
-//process.env.MONGODB_URL
-mongoose.connect("mongodb://localhost:27017/restfulblog",{useNewUrlParser:true, useUnifiedTopology:true});
+
+mongoose.connect(process.env.MONGODB_URL,{useNewUrlParser:true, useUnifiedTopology:true});
 
 app.set("view engine","ejs");
 app.use(express.static("public"));
@@ -106,8 +106,7 @@ app.delete("/blogs/:id",function(req,res){
 	})
 });
 
-//process.env.PORT,process.env.IP
 
-app.listen(3000,function(){
+app.listen(process.env.PORT,process.env.IP,function(){
 	console.log("Server is listening");
 });
