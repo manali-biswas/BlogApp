@@ -4,9 +4,11 @@
 <div class="ui huge header">
 	My Blogs
 </div>
-	<div class="ui top attached segment">
-		<div class="ui divided items">
-			<% blogs.forEach(function(blog){%>
+
+
+	<div class="ui top attached segment show" id="1">
+		<div class="ui divided items "  >
+			<%var i;var blog; for(i=0;i<5;i++){  blog=blogs[i];%>
 		
 		<div class="item">
 			<div class="image">
@@ -30,14 +32,54 @@
 			</div>		
 			</div>
 			
-	<%});%>
+	<%}%>
 
 		</div>
 	</div>
-
-
-	
+	<div class="ui top attached segment disable" id="2">
+		<div class="ui divided items "  >
+			<%var i;var blog; for(i=5;i<blogs.length;i++){  blog=blogs[i];%>
 		
-</div>
+		<div class="item">
+			<div class="image">
+				<img src="<%=blog.image%>">
+			</div>
+			
+			<div class="content">
+				<a class="ui header" href="/blogs/<%=blog._id%>"><%=blog.title%></a>
+				<div class="meta">
+					<span><%=blog.created.toDateString()%></span>
+				</div>
+				<div class="description">
+					<p>
+					<%-blog.body.substring(0,100)%>...
+				</p>
+				</div>
+				<div class="extra">
+					<a class="ui floated inverted orange button" href="/blogs/<%=blog._id%>">Read More<i class="chevron right icon"></i></a>					
+				</div>
+			
+			</div>		
+			</div>
+			
+			
+	<%}%>
+		</div>
+	</div>	
+	
+	
 
+<div class="ui pagination menu">
+  <a class="active item bt" href="#1" >
+    1
+  </a>  
+  <a class="item bt" href="#2" > 
+    2
+  </a>  
+</div>
+	</div>
+		
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/index.js" ></script>
 <%- include("partials/footer.ejs")%>

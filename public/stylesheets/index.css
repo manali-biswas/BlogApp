@@ -2,6 +2,19 @@ i.icon{
 	font-size:2em;
 }
 
+
+
+.show{
+	
+	opacity:1;
+	
+}
+
+.disable{
+	display:none;
+	
+}
+
 .container.main{
 	margin:5em;
 }
