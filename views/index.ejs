@@ -9,7 +9,7 @@
 
 	<div class="ui top attached segment show" id="1">
 		<div class="ui divided items "  >
-			<%var i;var blog; for(i=0;i<4;i++){  blog=blogs[i];%>
+			<%var j;var blog; for(j=0;j<5;j++){  blog=blogs[j];%>
 		
 		<div class="item">
 			<div class="image">
@@ -37,9 +37,10 @@
 
 		</div>
 	</div>
-	<div class="ui top attached segment disable" id="2">
+	<%var i; var p=5; var k=Math.ceil(blogs.length/5); for(i=1;i<k;i++){%>
+	<div class="ui top attached segment disable" id="<%=i+1%>">
 		<div class="ui divided items "  >
-			<%var i;var blog; for(i=4;i<blogs.length;i++){  blog=blogs[i];%>
+			<%var j;var blog; var t=p+5;if(p+5>blogs.length)t=blogs.length;for(j=p;j<t;j++){  blog=blogs[j];%>
 		
 		<div class="item">
 			<div class="image">
@@ -66,17 +67,18 @@
 			
 	<%}%>
 		</div>
-	</div>	
+	</div>	<%p=p+5;}%>
 	
 	
 
 <div class="ui pagination menu">
   <a class="active item bt" href="#1" >
     1
-  </a>  
-  <a class="item bt" href="#2" > 
-    2
-  </a>  
+  </a> 
+	<%var i;  var k=Math.ceil(blogs.length/5); for(i=1;i<k;i++){%>
+  <a class="item bt" href="#<%=i+1%>" > 
+    <%=i+1%>
+  </a>  <%}%>
 </div>
 	</div>
 		
