@@ -36,8 +36,6 @@ app.use(function(req,res,next){
 	next();
 });
 
-//User.register({username:"biswas.manali8@gmail.com"},"Remember@617");
-
 var blogSchema= new mongoose.Schema({
 	title : String,
 	image : String,
