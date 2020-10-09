@@ -20,6 +20,7 @@
 			<%-blog.body%>
 		</div>
 		<br>
+		<% if(currentUser){%>
 		<a href="/blogs/<%=blog._id%>/edit"><button class="ui inverted purple button">
 				Edit Blog
 			</button></a>
@@ -30,7 +31,7 @@
 				Delete Blog
 			</button>
 		</form>
-		
+		<%}%>
 		
 	</div>
 		

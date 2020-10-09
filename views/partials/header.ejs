@@ -15,8 +15,17 @@
 			<div class="header item">
 				<i class="sticky note icon"></i>Blog Site
 			</div>
-			<a href="/" class="item">Home</a>			
+			<a href="/" class="item">Home</a>
+			<% if(currentUser){%>		
 			<a href="/blogs/new" class="item">New Post</a>
+			<%}%>
+			<div class='right menu'>
 			<a href="/about" class="item">About</a>
+			<%if(!currentUser){%>
+				<a href="/login" class="item">Login</a>
+				<%}else{%>
+					<a href="/logout" class="item">Logout</a>
+					<%}%>
+			</div>
 		</div>		
 	</div>

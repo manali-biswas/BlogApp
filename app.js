@@ -1,17 +1,42 @@
-var mongoose=require("mongoose");
-var bodyParser=require("body-parser");
-var expressSanitizer=require("express-sanitizer");
-var methodOverride=require("method-override");
-var express=require("express");
-var app=express();
+const mongoose=require("mongoose");
+const bodyParser=require("body-parser");
+const expressSanitizer=require("express-sanitizer");
+const expressSession=require('express-session');
+const methodOverride=require("method-override");
+const express=require("express");
+const app=express();
+const passport=require('passport');
+const localStrategy=require('passport-local');
+const User=require('./public/user');
+const atlas='mongodb+srv://manali:c7qb6g7aEBZ9PFt@cluster0-crogt.mongodb.net/test?retryWrites=true&w=majority';
 
-mongoose.connect(process.env.MONGODB_URL,{useNewUrlParser:true, useUnifiedTopology:true});
+mongoose.connect(process.env.MONGODB_URL||atlas,{useNewUrlParser:true, useUnifiedTopology:true});
 
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
+
+app.use(expressSession({
+	secret:"Manali",
+	resave:false,
+	saveUninitialized:false
+	}));
+	
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req,res,next){
+	res.locals.currentUser=req.user;
+	next();
+});
+
+//User.register({username:"biswas.manali8@gmail.com"},"Remember@617");
 
 var blogSchema= new mongoose.Schema({
 	title : String,
@@ -31,6 +56,21 @@ app.get("/",function(req,res){
 app.get("/about",function(req,res){
 	res.render("home");
 });
+
+app.get("/login",function(req,res){
+	res.render('login');
+});
+
+app.post("/login",
+	passport.authenticate("local",{
+		successRedirect:"/blogs",
+		failureRedirect:"/blogs"
+	}));
+
+app.get('/logout',function(req,res){
+	req.logout();
+	res.redirect('/blogs');
+})
 
 app.get("/blogs",function(req,res){
 	Blog.find({},function(err,blogs){
@@ -107,6 +147,6 @@ app.delete("/blogs/:id",function(req,res){
 });
 
 
-app.listen(process.env.PORT,process.env.IP,function(){
+app.listen(process.env.PORT||3000,process.env.IP,function(){
 	console.log("Server is listening");
 });
